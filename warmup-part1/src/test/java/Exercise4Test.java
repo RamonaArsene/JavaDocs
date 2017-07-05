@@ -3,6 +3,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Comparator;
+
 
 /**
  * //TODO Uncomment those lines after developing the {@link MyImplementedList} methods.
@@ -112,6 +114,12 @@ public class Exercise4Test {
 
     @Test
     public void testSortMethodOverStringList() {
-//        testingStringValues.sort(//TODO add comparator);
+        Comparator<String> c = new Comparator<String>() {
+            public int compare(String o1, String o2) {
+                return o1.compareTo(o2);
+            }
+        };
+
+        testingStringValues.sort(c);
     }
 }

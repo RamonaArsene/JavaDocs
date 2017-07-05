@@ -24,7 +24,7 @@ import java.util.Iterator;
  * @author Cristian.Dumitru
  * @since 7/3/2017.
  */
-public class MyImplementedList<E> implements Iterable<E>{
+public class MyImplementedList<E> implements Iterable<E>, Comparator<E>{
 
     /**
      * The maximum accepted load property of the data structure.
@@ -211,29 +211,21 @@ public class MyImplementedList<E> implements Iterable<E>{
     //TODO you should name it: void sort(Comparator<? super E> c)
     //TODO create a custom comparator that compares objects by their "what you want" :D - HINT Comparator interface
 
-//    private <E> void swap(E[] a, int i, int j) {
-//        if (i != j) {
-//            E temp = a[i];
-//            a[i] = a[j];
-//            a[j] = temp;
-//        }
-//    }
-//
-//    public <E extends Comparable<? super E>> void selectionSort(E[] a) {
-//        for (int i = 0; i < a.length - 1; i++) {
-//            // find index of smallest element
-//            int smallest = i;
-//            for (int j = i + 1; j < a.length; j++) {
-//                if (a[j].compareTo(a[smallest])<=0) {
-//                    smallest = j;
-//                }
-//            }
-//
-//            swap(a, i, smallest);  // swap smallest to front
-//        }
-//    }
-//    public void sort(Comparator<? super Object> c){
-//        E elem = (E) elementData;
-//        this.selectionSort(elem);
-//    }
+    public int compare(E elem1, E elem2){
+        return elem1.hashCode()- elem2.hashCode();
+    }
+    public void sort(Comparator<E> c){
+
+        for (int i = 0; i<this.size; i++){
+            for(int j = i+1; j< this.size; j++)
+            if(c.compare((E)this.elementData[i], (E)elementData[j]) > 0)
+            {
+                Object aux;
+                aux = this.elementData[i];
+                elementData[i] = elementData[j];
+                elementData[j]=aux;
+
+            }
+        }
+    }
 }
