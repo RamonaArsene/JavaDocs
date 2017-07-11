@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+    
+    <changeSet id="ramona" author="Ramona">
+        <createTable tableName="PEOPLE_RAMONA_1">
+            <column name="PERS_ID" type="NUMBER(6)">
+                <constraints primaryKey="true" nullable="false"></constraints>
+            </column>
+            <column name="FIRST_NAME" type="VARCHAR2(40)">
+            </column>
+            <column name="LAST_NAME" type="VARCHAR2(40)">
+            </column>
+            <column name="EMAIL" type="VARCHAR2(30)">
+            </column>
+            <column name="PHONE_NUMBER" type="VARCHAR2(25)">
+            </column>
+            <column name="ADDRESS_ID" type="NUMBER(6)">
+            </column>
+
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
