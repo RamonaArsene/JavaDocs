@@ -12,6 +12,18 @@ public class QueryBuilder {
     private QueryType queryType;
     private List<Condition> conditions;
 
+    private List<Condition> joinConditions;
+
+    public Object getJoinTableName() {
+        return joinTableName;
+    }
+
+    public void setJoinTableName(Object joinTableName) {
+        this.joinTableName = joinTableName;
+    }
+
+    private Object joinTableName = null;
+
     public String getValueForQuery(Object value){
         if (value instanceof String){
             System.out.println(value);
@@ -31,6 +43,14 @@ public class QueryBuilder {
             this.conditions = new ArrayList<>();
         }
         this.conditions.add(condition);
+        return this;
+    }
+
+    public QueryBuilder addJoinCondition(Condition condition){
+        if (this.joinConditions == null){
+            this.joinConditions = new ArrayList<>();
+        }
+        this.joinConditions.add(condition);
         return this;
     }
 
@@ -78,6 +98,38 @@ public class QueryBuilder {
         }
         return sql.toString();
     }
+    private String createSelectJoinQuery(){
+        StringBuilder sql = new StringBuilder();
+        sql.append("select ");
+        boolean isFirst = true;
+        for(ColumnInfo columnInfo : queryColumns) {
+            if(!isFirst) {
+                sql.append(",");
+            }
+            sql.append(tableName + "." + columnInfo.getDbColumnName());
+            isFirst = false;
+        }
+        sql.append(" from " + tableName + "inner join " + joinTableName + " on ");
+
+        boolean joinAdded = false;
+        if(joinConditions != null && !joinConditions.isEmpty()) {
+            for(Condition  joinCondition : joinConditions) {
+                System.out.println(joinCondition.getValue());
+                sql.append(joinAdded ? " and" : "").append(joinCondition.getColumnName()).append("=")
+                        .append(getValueForQuery(joinCondition.getValue()));
+            }
+        }
+        boolean whereAdded = false;
+        if(conditions != null && !conditions.isEmpty()) {
+            for(Condition condition : conditions) {
+                System.out.println(condition.getValue());
+                sql.append(whereAdded ? " and" : " where UPPER(").append(condition.getColumnName()).append(") like UPPER('%")
+                        .append(getValueForQuery(condition.getValue())).append("%)");
+        }
+        }
+        return sql.toString();
+    }
+
 
     private String createDeleteQuery(){
         StringBuilder sql = new StringBuilder();
@@ -150,6 +202,8 @@ public class QueryBuilder {
             return createUpdateQuery();
         } else if (QueryType.DELETE.equals(this.queryType)) {
             return createDeleteQuery();
+        }else if(QueryType.SELECT.equals(this.queryType) && joinTableName != null){
+            return createSelectJoinQuery();
         }
         return null;
     }

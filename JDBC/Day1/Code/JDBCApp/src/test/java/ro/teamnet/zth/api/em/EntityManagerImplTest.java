@@ -6,6 +6,8 @@ import ro.teamnet.zth.appl.domain.Department;
 
 import java.math.BigDecimal;
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
 
 import static javafx.scene.input.KeyCode.T;
 import static org.junit.Assert.assertEquals;
@@ -19,10 +21,8 @@ public class EntityManagerImplTest {
 
     @Test
     public void testFindById() throws SQLException {
-        String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-        Connection con = DriverManager.getConnection(URL, DBProperties.USER, DBProperties.PASS);
         EntityManagerImpl emp = new EntityManagerImpl();
-        assertEquals("Administration", emp.findById(Department.class, (long) 10).getDepartmentName());
+        assertEquals((Long)1700L, emp.findById(Department.class, (long) 10).getLocation());
 
     }
 
@@ -31,20 +31,20 @@ public class EntityManagerImplTest {
         String URL = "jdbc:oracle:thin:@localhost:1521:xe";
         Connection con = DriverManager.getConnection(URL, DBProperties.USER, DBProperties.PASS);
         //BigDecimal nextId = new Long(0);
-        Long nextId = new Long(207);
+        Long nextId = new Long(271);
         EntityManagerImpl emp = new EntityManagerImpl();
-        assertEquals(nextId, emp.getNextIdVal("EMPLOYEES", "EMPLOYEE_ID"));
+        assertEquals(nextId, emp.getNextIdVal("departments", "department_ID"));
     }
 
     @Test
     public void testInsert() throws SQLException, IllegalAccessException {
-        Long id = new Long(207);
+        Long id = new Long(271);
         String URL = "jdbc:oracle:thin:@localhost:1521:xe";
         Connection con = DriverManager.getConnection(URL, DBProperties.USER, DBProperties.PASS);
         EntityManagerImpl emp = new EntityManagerImpl();
         Department dep = new Department();
         dep.setDepartmentName("DepNou");
-        dep.setLocation(1000L);
+        //dep.setLocation(1000L);
          Object rez = emp.insert(dep);
         assertEquals("DepNou", emp.findById(Department.class,id).getDepartmentName());
     }
@@ -54,7 +54,7 @@ public class EntityManagerImplTest {
         String URL = "jdbc:oracle:thin:@localhost:1521:xe";
             Connection con = DriverManager.getConnection(URL, DBProperties.USER, DBProperties.PASS);
             EntityManagerImpl emp = new EntityManagerImpl();
-            assertEquals(28, emp.findAll(Department.class).size()/3);
+            assertEquals(28, emp.findAll(Department.class).size());
 
     }
 
@@ -74,15 +74,38 @@ public class EntityManagerImplTest {
 
     @Test
     public void testUpdate2() throws SQLException, IllegalAccessException {
-        Long id = new Long(1700L);
+        Long id = new Long(207L);
         String URL = "jdbc:oracle:thin:@localhost:1521:xe";
         Connection con = DriverManager.getConnection(URL, DBProperties.USER, DBProperties.PASS);
         EntityManagerImpl emp = new EntityManagerImpl();
         Department dep = new Department();
         dep.setDepartmentName("DepNou5");
-        dep.setLocation(1000L);
+        dep.setLocation(1500L);
         dep.setId(207L);
         Object rez = emp.update(dep);
-        assertEquals(id.longValue(),  emp.findById(Department.class,id).getLocation().longValue());
+        //assertEquals(1500L,  emp.findById(Department.class,id).getLocation().longValue());
+    }
+
+    @Test
+    public void testDelete() throws SQLException, IllegalAccessException {
+        Long id = new Long(207L);
+        EntityManagerImpl emp = new EntityManagerImpl();
+        Department dep = new Department();
+        dep.setDepartmentName("DepNou");
+        dep.setLocation(1500L);
+        dep.setId(207L);
+        emp.delete(dep);
+        int entries = emp.findAll(Department.class).size()/3;
+        assertEquals(27, entries);
+    }
+
+    @Test
+    public void testFindByParams() throws SQLException {
+        EntityManagerImpl emp = new EntityManagerImpl();
+        Map<String, Object> params= new HashMap<String, Object>();
+        Object value = new Long(1400L);
+        params.put("LOCATION_ID", value);
+        assertEquals(1, emp.findByParams(Department.class, params).size());
+
     }
 }
