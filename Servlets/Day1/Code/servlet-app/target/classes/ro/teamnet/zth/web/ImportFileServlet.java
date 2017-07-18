@@ -27,7 +27,7 @@ public class ImportFileServlet extends HttpServlet {
         // TODO 1: Obtain the username from the request instance
 
         String userName = request.getParameter("user");
-
+        System.out.println("Inside post method");
 
         // Obtain the File object from the request instance
         Part file = request.getPart("uploadFile");
