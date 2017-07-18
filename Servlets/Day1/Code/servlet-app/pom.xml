@@ -51,78 +51,78 @@
                 <version>2.2</version>
                 <configuration>
                     <server>local_tomcat</server>
-                    <username>tomcat</username>
-                    <password>tomcat</password>
+                    <username>admin</username>
+                    <password>admin</password>
                     <!-- TODO Uncomment next line to deploy on Docker tomcat -->
-                    <!--<url>http://docker.local:49100/manager/text</url>-->
-                    <url>http://localhost:8080/manager/html</url>
+                    <url>http://192.168.99.100:49100/manager/text</url>
+                    <!--<url>localhost:8080/manager/html</url>-->
                 </configuration>
             </plugin>
 
 
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>jasperreports-maven-plugin</artifactId>
-                <version>1.0-beta-2</version>
-                <configuration>
-                    <outputDirectory>${project.build.directory}/jasper</outputDirectory>
-                    <compiler>net.sf.jasperreports.engine.design.JRJdtCompiler</compiler>
-                    <additionalProperties>
-                        <net.sf.jasperreports.default.pdf.encoding>UTF-8</net.sf.jasperreports.default.pdf.encoding>
-                    </additionalProperties>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>compile-reports</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>net.sf.jasperreports</groupId>
-                        <artifactId>jasperreports</artifactId>
-                         <!-- TODO 1: set version element with net.sf.jasperreports property defined at the top of pom.xml file -->
+            <!--<plugin>-->
+                <!--<groupId>org.codehaus.mojo</groupId>-->
+                <!--<artifactId>jasperreports-maven-plugin</artifactId>-->
+                <!--<version>1.0-beta-2</version>-->
+                <!--<configuration>-->
+                    <!--<outputDirectory>${project.build.directory}/jasper</outputDirectory>-->
+                    <!--<compiler>net.sf.jasperreports.engine.design.JRJdtCompiler</compiler>-->
+                    <!--<additionalProperties>-->
+                        <!--<net.sf.jasperreports.default.pdf.encoding>UTF-8</net.sf.jasperreports.default.pdf.encoding>-->
+                    <!--</additionalProperties>-->
+                <!--</configuration>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<goals>-->
+                            <!--<goal>compile-reports</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+                <!--<dependencies>-->
+                    <!--<dependency>-->
+                        <!--<groupId>net.sf.jasperreports</groupId>-->
+                        <!--<artifactId>jasperreports</artifactId>-->
+                         <!--&lt;!&ndash; TODO 1: set version element with net.sf.jasperreports property defined at the top of pom.xml file &ndash;&gt;-->
 
-                        <exclusions>
-                            <exclusion>
-                                <artifactId>jdtcore</artifactId>
-                                <groupId>eclipse</groupId>
-                            </exclusion>
-                        </exclusions>
-                    </dependency>
-                    <dependency>
-                        <groupId>ar.com.fdvs</groupId>
-                        <artifactId>DynamicJasper</artifactId>
-                        <version>5.0.2</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>net.sf.jasperreports</groupId>
-                        <artifactId>jasperreports-fonts</artifactId>
-                        <version>4.0.0</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>commons-collections</groupId>
-                        <artifactId>commons-collections</artifactId>
-                        <version>3.2</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.apache.poi</groupId>
-                        <artifactId>poi</artifactId>
-                        <version>3.11</version>
-                        <exclusions>
-                            <exclusion>
-                                <groupId>commons-logging</groupId>
-                                <artifactId>commons-logging</artifactId>
-                            </exclusion>
-                            <exclusion>
-                                <groupId>log4j</groupId>
-                                <artifactId>log4j</artifactId>
-                            </exclusion>
-                        </exclusions>
-                    </dependency>
-                </dependencies>
-            </plugin>
+                        <!--<exclusions>-->
+                            <!--<exclusion>-->
+                                <!--<artifactId>jdtcore</artifactId>-->
+                                <!--<groupId>eclipse</groupId>-->
+                            <!--</exclusion>-->
+                        <!--</exclusions>-->
+                    <!--</dependency>-->
+                    <!--<dependency>-->
+                        <!--<groupId>ar.com.fdvs</groupId>-->
+                        <!--<artifactId>DynamicJasper</artifactId>-->
+                        <!--<version>5.0.2</version>-->
+                    <!--</dependency>-->
+                    <!--<dependency>-->
+                        <!--<groupId>net.sf.jasperreports</groupId>-->
+                        <!--<artifactId>jasperreports-fonts</artifactId>-->
+                        <!--<version>4.0.0</version>-->
+                    <!--</dependency>-->
+                    <!--<dependency>-->
+                        <!--<groupId>commons-collections</groupId>-->
+                        <!--<artifactId>commons-collections</artifactId>-->
+                        <!--<version>3.2</version>-->
+                    <!--</dependency>-->
+                    <!--<dependency>-->
+                        <!--<groupId>org.apache.poi</groupId>-->
+                        <!--<artifactId>poi</artifactId>-->
+                        <!--<version>3.11</version>-->
+                        <!--<exclusions>-->
+                            <!--<exclusion>-->
+                                <!--<groupId>commons-logging</groupId>-->
+                                <!--<artifactId>commons-logging</artifactId>-->
+                            <!--</exclusion>-->
+                            <!--<exclusion>-->
+                                <!--<groupId>log4j</groupId>-->
+                                <!--<artifactId>log4j</artifactId>-->
+                            <!--</exclusion>-->
+                        <!--</exclusions>-->
+                    <!--</dependency>-->
+                <!--</dependencies>-->
+            <!--</plugin>-->
 
         </plugins>
 
