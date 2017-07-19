@@ -239,8 +239,8 @@ public class FiltersAndMapExercise {
         System.out.println("Exercise 1: " + findEvenNumbers());
         System.out.println("Exercise 2: " + findPersonByName("Jack"));
         System.out.println("Exercise 3: " + filterNull());
-        System.out.println("Exercise 4: " +   findPersonByAgeAndName(persons,"James", 20));
-        System.out.println("Exercise 5: " +   doubleNumbers());
+        System.out.println("Exercise 4: " + findPersonByAgeAndName(persons,"James", 20));
+        System.out.println("Exercise 5: " + doubleNumbers());
         System.out.println("Exercise 6: " + getOnlyNames(persons));
         System.out.println("Exercise 7: " + flatteningLists());
 

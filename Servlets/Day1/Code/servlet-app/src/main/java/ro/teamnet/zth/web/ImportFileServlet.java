@@ -33,13 +33,13 @@ public class ImportFileServlet extends HttpServlet {
         Part file = request.getPart("uploadFile");
 
         // read the lines from CSV file and print the values
-        // TODO 2: Replace T with Person
+        //  2: Replace T with Person
         List<Person> personsFromFile = readLines(file);
 
         // Set the response type
         response.setContentType("text/html");
 
-        // TODO 6: Print a nice message to the response so the user will be notified of the result
+        //  6: Print a nice message to the response so the user will be notified of the result
         // TIP: The final text printed on the response should be something like this: "Hello <username>! You successfully imported 4 people. "
 
         PrintWriter out = response.getWriter();

@@ -25,6 +25,17 @@
         <url-pattern>/hello</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>HelloWorldServletForward</servlet-name>
+        <servlet-class>ro.teamnet.zth.web.HelloWorldServletForward</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>HelloWorldServletForward</servlet-name>
+        <url-pattern>/helloforward</url-pattern>
+    </servlet-mapping>
+
+
 
     <!--Welcome file-->
     <welcome-file-list>

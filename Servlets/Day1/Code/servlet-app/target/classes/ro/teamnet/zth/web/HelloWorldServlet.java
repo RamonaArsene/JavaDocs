@@ -10,6 +10,7 @@
 
 package ro.teamnet.zth.web;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,17 +38,21 @@ public class HelloWorldServlet extends HttpServlet {
         // Set the response type
         response.setContentType("text/html");
 
-        // TODO Obtain the username from the request instance
+        //Obtain the username from the request instance
         user = request.getParameter("user");
-        //System.out.println(user);
-
-
-        // TODO Write the response content to the PrintWriter instance of the response instance
-        // TIP: use write() method
-        //response.getWriter().write("Buna, " + user);
 
         PrintWriter out = response.getWriter();
         out.println("<h1>" + "Buna, " + user +" </h1>");
+
+        RequestDispatcher requestDispatcher =
+                request.getRequestDispatcher("/helloforward");
+
+        request.setAttribute("testAttribute", "Enjoy Z2H");
+
+        requestDispatcher.include(request, response);
+        response.getWriter().write("<b>Some text added </b>");
+
+
 
         out.close();
 
